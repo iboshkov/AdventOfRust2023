@@ -2,7 +2,7 @@ use std::collections::HashMap;
 use std::{fs::File, io::Read};
 use regex::Regex;
 
-fn get_wins(winning: Vec<i32>, mine: Vec<i32>, i: usize, cards: Vec<(usize, Vec<i32>, Vec<i32>)>, memo: &mut HashMap<usize, Vec<usize>>) -> (i32, usize, Vec<usize>) {
+fn get_wins(winning: &Vec<i32>, mine: &Vec<i32>, i: usize, cards: &Vec<(usize, Vec<i32>, Vec<i32>)>, memo: &mut HashMap<usize, Vec<usize>>) -> (i32, usize, Vec<usize>) {
     if memo.contains_key(&i) {
         // println!("Memo hit");
         let vec = memo.get(&i).unwrap();
@@ -106,10 +106,10 @@ fn main() {
         }
 
         let (_, _, copies) = get_wins(
-            winning.clone(), 
-            mine.clone(), 
+            &winning, 
+            &mine, 
             cardNb-1, 
-            cards.clone(),
+            &cards,
             &mut memo);
     
         to_process.append(&mut copies.clone());
